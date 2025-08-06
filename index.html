@@ -40,7 +40,7 @@
 
   <style>
     .scroll-box {
-      max-height: 6em; /* 4 lines * 1.5em line-height */
+      max-height: 9em; /* 4 lines * 1.5em line-height */
       overflow-y: scroll;
       background-color: #f9f9f9;
       padding: 12px;
@@ -91,6 +91,19 @@
       font-weight: bold;
       color: #333;
     }
+
+
+    .menu-list a {
+  font-size: 0.95em;
+  padding: 0.4em 0;
+}
+.menu-label {
+  font-size: 0.8em;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
   </style>
   
 
@@ -193,8 +206,30 @@
 
 
 
-<div class="image-container" style="text-align: center; margin: 1px 0;">
-  <img src="assets/images/main_fig1.jpg" alt="Main Figure 1" style="max-width: 70%; height: auto;">
+<div class="columns is-vcentered">
+  <!-- Image Column: Grows to take remaining space -->
+  <div class="column">
+    <div class="image-container" style="text-align: center;">
+      <img src="assets/images/main_fig1.jpg" alt="Main Figure 1" style="max-width: 90%; height: auto;">
+    </div>
+  </div>
+
+  <!-- Narrow TOC Column -->
+  <div class="column is-narrow" style="max-width: 180px; padding-left: 1rem; border-left: 1px solid #ccc;">
+    <div class="table-of-contents">
+      <h3><strong><u>Table of Contents</u></strong></h3>
+      <ul>
+        <li><a href="#intro">Intro</a></li>
+        <li><a href="#examples">Examples</a></li>
+        <li><a href="#our-idea">Method</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#test-time-scaling">Test-Time Scaling</a></li>
+        <li><a href="#uncertainty-cot">Uncertainty CoT</a></li>
+        <li><a href="#BibTeX">BibTeX</a></li>
+        <li><a href="#Code">Code</a></li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 
@@ -205,34 +240,26 @@
 <section id="why-rlcr" class="section" style="font-family: 'DM Sans', sans-serif;">
   <div class="container">
     <div class="box" style="border: 1px solid #ccc; padding: 1.5rem;">
-      
 
       <h2 class="title" style="text-align: center;">Intro</h2>
 
-      <div class="columns">
-        <div class="column is-4">
-          <div class="content">
-            <p>
-              Recent advances in reasoning training - particularly <strong>O1-style models</strong> and <strong>RL with verifiable rewards (RLVR)</strong> - have improved the accuracy of large language models (LLMs). These approaches optimize for correctness, encouraging models to output the right answer when possible.
-            </p>
-
-            <p>
-              However, these same methods tend to produce <strong>overconfident models</strong> that are more prone to <strong>hallucination</strong>. 
-              Because the reward signal focuses solely on final answer correctness, models are incentivized to guess—even when they are uncertain. 
-              This is especially problematic in high-stakes settings like <strong>healthcare</strong> and <strong>law</strong>, where confident errors can be harmful or even dangerous.
-            </p>
-          </div>
-        </div>
-        <div class="column is-7">
-          <div class="image-container" style="text-align: center; margin: 10px 0;">
-            <img src="assets/images/exampleOutputs.jpg" alt="Example Outputs" style="max-width: 100%; height: auto;">
-          </div>
-        </div>
-      </div>
-
       <div class="content">
+        <!-- Float image right with appropriate styling -->
+        <img src="assets/images/exampleOutputs.jpg" alt="Example Outputs"
+             style="float: right; width: 70%; margin-left: 20px; margin-bottom: 10px; max-width: 100%; height: auto;">
+
         <p>
-          <strong>RLCR</strong> addresses this gap. We introduce a reinforcement learning framework that trains models to reason about their own uncertainty—rewarding not just accuracy, but also calibrated confidence. 
+          Recent advances in reasoning training — particularly <strong>RL with verifiable rewards (RLVR)</strong> — have improved the accuracy of large language models (LLMs). These approaches optimize for correctness, encouraging models to output the right answer when possible.
+        </p>
+
+        <p>
+          However, these same methods tend to produce <strong>overconfident models</strong> that are more prone to <strong>hallucination</strong>. 
+          Because the reward signal focuses solely on final answer correctness, models are incentivized to guess — even when they are uncertain. 
+          This is especially problematic in high-stakes settings like <strong>healthcare</strong> and <strong>law</strong>, where confident errors can be harmful or even dangerous.
+        </p>
+
+        <p>
+          <strong>RLCR</strong> addresses this gap. We introduce a reinforcement learning framework that trains models to reason about their own uncertainty — rewarding not just accuracy, but also calibrated confidence.
         </p>
 
         <p>
@@ -241,7 +268,7 @@
         </p>
 
         <p>
-          In domains where trust, safety, and interpretability matter, this dual optimization—getting the right answer, and knowing when you might not—makes all the difference.
+          In domains where trust, safety, and interpretability matter, this dual optimization — getting the right answer, and knowing when you might not — makes all the difference.
         </p>
       </div>
     </div>
@@ -259,15 +286,17 @@
 
 
 
+
 <script src="examples-content.js"></script>
 
 
 
 
-<section class="section" style="font-family: 'DM Sans', sans-serif;">
+<section class="section" id="examples" style="font-family: 'DM Sans', sans-serif;">
   <div class="container">
     <div class="box" style="border: 1px solid #ccc; padding: 1.5rem;">
   <h2 class="title is-3 has-text-centered">Examples</h2>
+  <p>Below, you can see examples of RLCR in action. Click on the tabs to see the model's confidence and answer for each example and compare it to RLVR and Base model outputs!</p><br>
   <div class="container">
     
     <!-- Gray Question Box -->
@@ -295,6 +324,7 @@
       </div>
     </div>
   </div>
+  <br> These examples are from the RLCR models trained on Math. 
 </section>
 
 <script>
@@ -356,6 +386,7 @@
     // Load first example
     loadExample(0);
   }
+  
 </script>
 
 
@@ -378,7 +409,7 @@
 <section id="our-idea" class="section" style="font-family: 'DM Sans', sans-serif;">
   <div class="container">
     <div class="box" style="border: 1px solid #ccc; padding: 1.5rem;">
-      <h2 class="title is-3" style="text-align: center;">Method</h2>
+      <h2 class="title is-3" style="text-align: center;" id="our-idea">Method</h2>
 
       <div class="content">
         <p><strong>RLCR makes a simple shift:</strong> instead of rewarding only correctness, we reward both accuracy and calibrated confidence.</p>
@@ -458,7 +489,7 @@
         </div>
       </div>
       <br>
-      <h2 class="title is-3 has-text-centered">What We Prove</h2>
+  <p><strong>What We Prove:</strong></p>
   <p>✅ RLCR provably optimizes for both accuracy & calibration.</p>
   <p>✅ Calibration comes at no cost to accuracy.</p>
   <p>✅ Works with any bounded proper scoring rule — we use the Brier score.</p>
@@ -644,10 +675,10 @@
 
 
 
-<section class="section" id="BibTeX" style="font-family: 'DM Sans', sans-serif;">
+<section class="section" id="BibTeX" style="font-family: 'DM Sans', sans-serif; border: 1px solid #ccc; border-radius: 8px; padding: 1.5rem;">
   <div class="container is-max-desktop content">
     <h2 class="title" style="text-align: center;">BibTeX</h2>
-    <pre style="background-color: #bbb9b98b; padding: 15px; border-radius: 5px;"><code>@misc{damani2025binaryrewardstraininglms,
+    <pre style="background-color: #bbb9b98b; padding: 15px; border-radius: 5px; border: 1px solid #ccc;"><code>@misc{damani2025binaryrewardstraininglms,
   title={Beyond Binary Rewards: Training LMs to Reason About Their Uncertainty},
   author={Mehul Damani and Isha Puri and Stewart Slocum and Idan Shenfeld and Leshem Choshen and Yoon Kim and Jacob Andreas},
   year={2025},
@@ -658,6 +689,26 @@
 }</code></pre>
   </div>
 </section>
+
+
+<br><br>
+
+<section class="section" id="Code" style="font-family: 'DM Sans', sans-serif; border: 1px solid #ccc; border-radius: 8px; padding: 1.5rem;">
+  <div class="container is-max-desktop content">
+    <h2 class="title" style="text-align: center;">Code</h2>
+  <div class="columns">
+    <div class="column">
+      <img src="https://github-readme-stats.vercel.app/api/pin/?username=damanimehul&repo=RLCR" alt="RLCR repo card" />
+    </div>
+    <div class="column">
+      <p><br>For all code, models, and data, check out the <a href="https://github.com/damanimehul/RLCR">RLCR GitHub Repo</a>. We provide a detailed README with instructions for setting up, training, and evaluating the model.</p>
+    </div>
+  </div>
+  </div>
+
+
+</section>
+
 
 </body>
 </html>

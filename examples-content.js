@@ -195,7 +195,112 @@ const examples = [
           <div class="gray-box"><span class="tag-label">&lt;confidence&gt;</span> 0.95 <span class="tag-label">&lt;/confidence&gt;</span></div>
         </div>
       `
+    },
+
+    {
+      title: "Example - Math",
+      question: "Dalton, Hunter, Alex, Bella, and Chris formed a Superhero Fan Club. They set a goal to watch as many Superhero movies as they could in one summer. Dalton watched 15 movies, Hunter watched 19, Alex watched 25, Bella watched 21, and Chris watched 11. They all watched 5 superhero movies together, while Dalton, Hunter, and Alex watched an additional 3 movies only among themselves, and Bella and Chris watched 2 more movies only with each other. Every other movie they watched was different. How many different movies did they see? \n Ground Truth Answer: 63",
+      content: `
+        <div class="box" style="background-color: #fceef5;">
+          <p><strong>RLCR (ours)</strong></p>
+          <p><div class="scroll-box"><span class="tag-label">&lt;think&gt;</span><br>
+    To determine the total number of different movies the Superhero Fan Club members watched, we need to account for the movies watched individually and in groups, ensuring we don’t double-count any movies.
+    
+    First, let’s sum the total number of movies watched by each member without considering overlaps:  
+    - Dalton watched 15 movies.  
+    - Hunter watched 19 movies.  
+    - Alex watched 25 movies.  
+    - Bella watched 21 movies.  
+    - Chris watched 11 movies.  
+    
+    Adding these gives:  
+    \\[
+    15 + 19 + 25 + 21 + 11 = 91
+    \\]
+    
+    Next, we need to subtract the overlaps. They all watched 5 movies together, so we subtract 4 times 5 (since the 5 movies are counted 5 times in the initial sum, once for each person):  
+    \\[
+    91 - 4 \\times 5 = 91 - 20 = 71
+    \\]
+    
+    Now, we need to account for the additional movies watched in smaller groups. Dalton, Hunter, and Alex watched 3 more movies only among themselves. These 3 movies are already included in the initial counts for Dalton, Hunter, and Alex, but we need to ensure they are not double-counted in the all-together group. Since the 3 movies are only among these three, they are not part of the 5 movies watched together, so we don’t need to subtract them again. They are already included in the individual counts and the group of 5, so we add them back to the total after the initial subtraction:  
+    \\[
+    71 + 3 = 74
+    \\]
+    
+    Bella and Chris watched 2 more movies only with each other. These 2 movies are already included in the initial counts for Bella and Chris, but we need to ensure they are not double-counted. Since the 2 movies are only between Bella and Chris, they are not part of the 5 movies watched together or the 3 movies watched by Dalton, Hunter, and Alex, so we add them back to the total after the initial subtraction:  
+    \\[
+    74 + 2 = 76
+    \\]
+    
+    At this point, we have accounted for all the overlaps, and the total number of different movies they saw is 76.
+    </div></p>
+          <div class="gray-box"><span class="tag-label">&lt;answer&gt;</span> 76 <span class="tag-label">&lt;/answer&gt;</span></div>
+          <p><div class="scroll-box"><span class="tag-label">&lt;analysis&gt;</span><br>
+    Upon reviewing the solution, I notice that the reasoning process involves summing the total movies watched individually, subtracting the overlaps, and then adding back the group-specific movies. The initial sum of 91 is correct, and the subtraction of 20 for the 5 movies watched together is appropriate, resulting in 71. However, the addition of the 3 movies watched by Dalton, Hunter, and Alex (3) and the 2 movies watched by Bella and Chris (2) is problematic. These movies are already included in the individual counts and the group of 5, so adding them back is redundant and unnecessary. The reasoning does not clearly explain why these movies are added back, and the final total of 76 does not seem to be derived from a clear, step-by-step logical flow. The explanation about the 3 movies being “only among these three” and not part of the 5 is confusing, as the 3 movies are part of the individual counts and the group of 5, so they should not be added back. The 2 movies watched by Bella and Chris are also problematic, as they are only between Bella and Chris, but the reasoning does not clearly address how they are added back without double-counting. The final answer of 76 is not supported by the reasoning, and the steps are convoluted, making the solution unclear and potentially incorrect.
+    </span><br><span class="tag-label">&lt;/analysis&gt;</span></div></p>
+          <div class="gray-box"><span class="tag-label">&lt;confidence&gt;</span> 0.3 <span class="tag-label">&lt;/confidence&gt;</span></div>
+        </div>
+    
+        <div class="box" style="background-color: #e6f0ff;">
+          <p><strong>RLVR</strong></p>
+          <p><div class="scroll-box"><span class="tag-label">&lt;think&gt;</span><br>
+    To determine the total number of different movies watched by Dalton, Hunter, Alex, Bella, and Chris, we need to carefully account for the movies they watched together and the movies they watched exclusively among themselves and with each other.
+    
+    1. <strong>Total movies watched by each individual:</strong>  
+    - Dalton: 15 movies  
+    - Hunter: 19 movies  
+    - Alex: 25 movies  
+    - Bella: 21 movies  
+    - Chris: 11 movies  
+    
+    2. <strong>Movies watched together:</strong>  
+    They all watched 5 movies together.
+    
+    3. <strong>Movies watched exclusively among themselves:</strong>  
+    Dalton, Hunter, and Alex watched an additional 3 movies only among themselves.  
+    Bella and Chris watched 2 more movies only with each other.
+    
+    4. <strong>Calculating the total number of movies watched:</strong>  
+    First, sum the total movies watched by each individual:  
+    \\[
+    15 + 19 + 25 + 21 + 11 = 91
+    \\]
+    
+    - Subtract the movies watched together (since they are counted multiple times in the individual totals):  
+    \\[
+    91 - 5 = 86
+    \\]
+    
+    - Add back the movies watched together (they should only be counted once):  
+    \\[
+    86 + 5 = 91
+    \\]
+    
+    - Subtract the movies watched exclusively among themselves and with each other (since they are also counted multiple times):  
+    - Dalton, Hunter, and Alex watching 3 movies only among themselves are already subtracted when we subtracted the 5 movies watched together.  
+    - Bella and Chris watching 2 movies only with each other are already subtracted when we subtracted the 5 movies watched together.
+    
+    Therefore, we do not need to make any further adjustments for these exclusive movies as they are already accounted for in the initial sum and subtraction.
+    
+    5. <strong>Final calculation:</strong>  
+    The total number of different movies they saw is the sum of all individual movies watched, minus the movies watched together (to avoid double-counting), plus the movies watched together again (to include them once), and no further adjustments are needed for the exclusive movies:  
+    \\[
+    91 - 5 + 5 = 91
+    \\]
+    
+    Thus, the total number of different movies they saw is:  
+    \\[
+    \\boxed{91}
+    \\]
+    </span><br><span class="tag-label">&lt;/think&gt;</span></div></p>
+          <div class="gray-box"><span class="tag-label">&lt;answer&gt;</span> 91 <span class="tag-label">&lt;/answer&gt;</span></div>
+          <div class="gray-box"><span class="tag-label">&lt;confidence&gt;</span> 0.9 <span class="tag-label">&lt;/confidence&gt;</span></div>
+        </div>
+      `
     }
+
+    
     
   ];
   
