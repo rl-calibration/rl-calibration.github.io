@@ -52,7 +52,7 @@ const examples = [
             <p><strong>RLCR (ours)</strong></p>
       
             <div class="scroll-box">
-              <span class="tag-label">&lt;think&gt;</span><br>
+              <span class="tag-label">&lt;think&gt;</span>
               In a 'gurning' contest, participants compete to make the most exaggerated and grotesque facial expressions, with the neck being a key area for movement and expression. The term "gurning" itself is derived from the word "gurn," which means to make a grotesque or contorted face. In such contests, the neck is often the focal point because it allows for a wide range of movements that can enhance the visual impact of the facial expression. The neck can be twisted, bent, and contorted in various ways to create the most extreme and humorous expressions. The contestant who can achieve the most exaggerated and entertaining neck movement or contortion is typically the winner. This type of contest is often seen in pub quizzes, village fetes, or other informal gatherings where humor and entertainment are the main goals. The neck is the primary area of focus because it is the most visible and flexible part of the face, allowing for a wide range of movements that can be easily exaggerated and observed by the audience.
               <br><span class="tag-label">&lt;/think&gt;</span>
             </div>
