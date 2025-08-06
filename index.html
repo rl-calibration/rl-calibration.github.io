@@ -224,7 +224,7 @@
           </div>
         </div>
         <div class="column is-7">
-          <div class="image-container" style="text-align: center; margin: 20px 0;">
+          <div class="image-container" style="text-align: center; margin: 10px 0;">
             <img src="assets/images/exampleOutputs.jpg" alt="Example Outputs" style="max-width: 100%; height: auto;">
           </div>
         </div>
@@ -378,7 +378,7 @@
 <section id="our-idea" class="section" style="font-family: 'DM Sans', sans-serif;">
   <div class="container">
     <div class="box" style="border: 1px solid #ccc; padding: 1.5rem;">
-      <h2 class="title is-3" style="text-align: center;">Our Idea</h2>
+      <h2 class="title is-3" style="text-align: center;">Method</h2>
 
       <div class="content">
         <p><strong>RLCR makes a simple shift:</strong> instead of rewarding only correctness, we reward both accuracy and calibrated confidence.</p>
@@ -448,17 +448,22 @@
 
             <p class="mt-4"><strong>RLCR reward:</strong></p>
             <p>$$
-            R_{\text{RLCR}} = \mathbb{1}(\hat{y} = y) - \left( \hat{p} - \mathbb{1}(\hat{y} = y) \right)^2
+            R_{\text{RLCR}} = \mathbb{1}(\hat{y} = y) - \left( \hat{q} - \mathbb{1}(\hat{y} = y) \right)^2
             $$</p>
 
             <p>
-              where \( \hat{y} \) is the model’s prediction, \( y \) is the ground truth, and \( \hat{p} \) is the model’s confidence estimate.
+              where \( \hat{y} \) is the model’s prediction, \( y \) is the ground truth, and \( \hat{q} \) is the model’s confidence estimate.
             </p>
           </div>
         </div>
       </div>
+      <br>
+      <h2 class="title is-3 has-text-centered">What We Prove</h2>
+  <p>✅ RLCR provably optimizes for both accuracy & calibration.</p>
+  <p>✅ Calibration comes at no cost to accuracy.</p>
+  <p>✅ Works with any bounded proper scoring rule — we use the Brier score.</p>
     </div>
-  </div>
+
 </section>
 
 <!-- MathJax -->
@@ -528,21 +533,6 @@
 
 
 
-<section id="why-rlcr" class="section" style="font-family: 'DM Sans', sans-serif;">
-  <div class="container">
-    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem;">
-      <h2 class="title is-3 has-text-centered">What We Prove</h2>
-      <p> ✅ RLCR provably optimizes for both accuracy & calibration.</p>
-      <p> ✅ Calibration comes at no cost to accuracy.</p>
-      <p> ✅ Works with any bounded proper scoring rule — we use the Brier score.</p>
-    </div>
-  </div>
-</section>
-
-
-
-
-
 
 
 
@@ -558,7 +548,7 @@
 <section id="results" class="section" style="font-family: 'DM Sans', sans-serif;">
   <div class="container">
     <div class="box" style="border: 1px solid #ccc; padding: 1.5rem;">
-      <h2 class="title is-3 has-text-centered">Does it work? Yes! 📊</h2>
+      <h2 class="title is-3 has-text-centered">Results 📊</h2>
 
       <p>
         On diverse QA & math benchmarks (both in-domain and out-of-distribution):
