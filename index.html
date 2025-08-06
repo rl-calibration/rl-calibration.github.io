@@ -33,21 +33,66 @@
   <script src="./static/js/index.js"></script>
 
 
+
+  
+
+
+
   <style>
     .scroll-box {
-      max-height: 200px;
-      overflow-y: auto;
+      max-height: 6em; /* 4 lines * 1.5em line-height */
+      overflow-y: scroll;
       background-color: #f9f9f9;
       padding: 12px;
       margin: 10px 0;
       border-left: 4px solid #ccc;
-      font-family: inherit; /* ← Uses same font as surrounding text */
+      font-family: inherit;
       white-space: pre-wrap;
-      line-height: 1.5;
+      line-height: 1;
+      scrollbar-gutter: stable;
+      font-size: 0.85em; /* smaller font */
+
+    }
+
+    .tag-label {
+      font-weight: bold;
+      color: #333;
+    }
+  
+    /* Optional: customize scrollbar for WebKit browsers */
+    .scroll-box::-webkit-scrollbar {
+      width: 8px;
+    }
+  
+    .scroll-box::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 4px;
+    }
+  
+    .scroll-box::-webkit-scrollbar-track {
+      background: transparent;
     }
   </style>
   
+  
+  <style>
+    .gray-box {
+      background-color: #f5f5f5;
+      padding: 12px;
+      margin: 10px 0;
+      border-left: 4px solid #bbb;
+      font-family: inherit;
+      line-height: 1;
+      font-size: 0.85em; /* smaller font */
 
+    }
+  
+    .tag-label {
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+  
 
 </head>
 
@@ -176,7 +221,6 @@
     
     <!-- Gray Question Box -->
     <div id="question-box" class="box" style="background-color: #f5f5f5;">
-      <p><strong>Question</strong></p>
       <p id="question-text">Loading...</p>
     </div>
 
@@ -211,14 +255,27 @@
     const exampleList = document.getElementById('example-list');
 
     function loadExample(index) {
-      const ex = examples[index];
-      questionBox.innerText = ex.question;
-      viewerContent.innerHTML = ex.content;
+  const ex = examples[index];
 
-      document.querySelectorAll('.example-link').forEach(link => link.classList.remove('is-active'));
-      const activeLink = document.querySelector(`[data-index="${index}"]`);
-      if (activeLink) activeLink.classList.add('is-active');
-    }
+  // Split question and ground truth answer (separated by newline in original format)
+  const parts = ex.question.split('\n');
+  const questionLine = parts[0].trim();
+  const groundTruthLine = parts.length > 1 ? parts[1].trim() : "";
+
+  // Insert into question box
+  const questionBox = document.getElementById('question-text');
+  questionBox.innerHTML = `<strong>Question:</strong> ${questionLine}<br><strong>Ground Truth Answer:</strong> ${groundTruthLine.replace('Ground Truth Answer: ', '')}`;
+
+  // Insert viewer content
+  const viewerContent = document.getElementById('viewer-content');
+  viewerContent.innerHTML = ex.content;
+
+  // Highlight selected example
+  document.querySelectorAll('.example-link').forEach(link => link.classList.remove('is-active'));
+  const activeLink = document.querySelector(`[data-index="${index}"]`);
+  if (activeLink) activeLink.classList.add('is-active');
+}
+
 
     // Populate sidebar
     examples.forEach((ex, i) => {
