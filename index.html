@@ -261,8 +261,8 @@
 
 <section id="why-rlcr" class="section" style="font-family: 'DM Sans', sans-serif;">
   <div class="container">
-    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem;">
-
+    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem; position: relative;">
+      <a href="#top" style="position: absolute; top: 10px; right: 10px; font-size: 0.8rem;">Back to Top</a>
       <h2 class="title" style="text-align: center;">Intro</h2>
 
       <div class="content">
@@ -297,56 +297,43 @@
   </div>
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
 <script src="examples-content.js"></script>
-
-
-
 
 <section class="section" id="examples" style="font-family: 'DM Sans', sans-serif;">
   <div class="container">
-    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem;">
-  <h2 class="title is-3 has-text-centered">Examples</h2>
-  <p>Below, you can see examples of RLCR in action. Click on the tabs to see the model's confidence and answer for each example and compare it to RLVR and Base model outputs!</p><br>
-  <div class="container">
-    
-    <!-- Gray Question Box -->
-    <div id="question-box" class="box" style="background-color: #f5f5f5;">
-      <div id="question-text">Loading...</div>
-    </div>
-    
+    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem; position: relative;">
+      <a href="#top" style="position: absolute; top: 10px; right: 10px; font-size: 0.8rem;">Back to Top</a>
+      <h2 class="title is-3 has-text-centered">Examples</h2>
+      <p>Below, you can see examples of RLCR in action. Click on the tabs to see the model's confidence and answer for each example and compare it to RLVR and Base model outputs!</p><br>
+      <div class="container">
+        
+        <!-- Gray Question Box -->
+        <div id="question-box" class="box" style="background-color: #f5f5f5;">
+          <div id="question-text">Loading...</div>
+        </div>
+        
+        <div class="columns">
+          <!-- Main Viewing Area -->
+          <div class="column is-9">
+            <div id="viewer-content" class="box" style="min-height: 500px;">
+              <!-- Dynamic content inserted here -->
+            </div>
+          </div>
 
-    <div class="columns">
-      <!-- Main Viewing Area -->
-      <div class="column is-9">
-        <div id="viewer-content" class="box" style="min-height: 500px;">
-          <!-- Dynamic content inserted here -->
+          <!-- Sidebar Navigation -->
+          <div class="column is-3">
+            <aside class="menu">
+              <p class="menu-label">Examples</p>
+              <ul class="menu-list" id="example-list">
+                <!-- List items populated by JS -->
+              </ul>
+            </aside>
+          </div>
         </div>
       </div>
-
-      <!-- Sidebar Navigation -->
-      <div class="column is-3">
-        <aside class="menu">
-          <p class="menu-label">Examples</p>
-          <ul class="menu-list" id="example-list">
-            <!-- List items populated by JS -->
-          </ul>
-        </aside>
-      </div>
+      <br> These examples are from the RLCR models trained on Math. 
     </div>
   </div>
-  <br> These examples are from the RLCR models trained on Math. 
 </section>
 
 <script>
@@ -359,35 +346,32 @@
     const exampleList = document.getElementById('example-list');
 
     function loadExample(index) {
-  const ex = examples[index];
+      const ex = examples[index];
 
-  const parts = ex.question.split('\n');
-  const questionLine = parts[0].trim();
-  const groundTruthLine = parts.length > 1 ? parts[1].trim() : "";
+      const parts = ex.question.split('\n');
+      const questionLine = parts[0].trim();
+      const groundTruthLine = parts.length > 1 ? parts[1].trim() : "";
 
-  // Better rendering: no <strong> wrapping inline LaTeX
-  const questionBox = document.getElementById('question-text');
-  questionBox.innerHTML = `
-    <div><strong>Question:</strong> <span class="math-question">${questionLine}</span></div>
-    <div><strong>Ground Truth Answer:</strong> <span class="math-answer">${groundTruthLine.replace('Ground Truth Answer: ', '')}</span></div>
-  `;
+      // Better rendering: no <strong> wrapping inline LaTeX
+      const questionBox = document.getElementById('question-text');
+      questionBox.innerHTML = `
+        <div><strong>Question:</strong> <span class="math-question">${questionLine}</span></div>
+        <div><strong>Ground Truth Answer:</strong> <span class="math-answer">${groundTruthLine.replace('Ground Truth Answer: ', '')}</span></div>
+      `;
 
-  const viewerContent = document.getElementById('viewer-content');
-  viewerContent.innerHTML = ex.content;
+      const viewerContent = document.getElementById('viewer-content');
+      viewerContent.innerHTML = ex.content;
 
-  // Highlight active link
-  document.querySelectorAll('.example-link').forEach(link => link.classList.remove('is-active'));
-  const activeLink = document.querySelector(`[data-index="${index}"]`);
-  if (activeLink) activeLink.classList.add('is-active');
+      // Highlight active link
+      document.querySelectorAll('.example-link').forEach(link => link.classList.remove('is-active'));
+      const activeLink = document.querySelector(`[data-index="${index}"]`);
+      if (activeLink) activeLink.classList.add('is-active');
 
-  // Force MathJax to re-typeset all updated math
-  if (window.MathJax) {
-    MathJax.typeset();
-  }
-}
-
-
-
+      // Force MathJax to re-typeset all updated math
+      if (window.MathJax) {
+        MathJax.typeset();
+      }
+    }
 
     // Populate sidebar
     examples.forEach((ex, i) => {
@@ -408,26 +392,12 @@
     // Load first example
     loadExample(0);
   }
-  
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <section id="our-idea" class="section" style="font-family: 'DM Sans', sans-serif;">
   <div class="container">
-    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem;">
+    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem; position: relative;">
+      <a href="#top" style="position: absolute; top: 10px; right: 10px; font-size: 0.8rem;">Back to Top</a>
       <h2 class="title is-3" style="text-align: center;" id="our-idea">Method</h2>
 
       <div class="content">
@@ -465,7 +435,8 @@
         <p>In RLCR, the reward for giving an incorrect answer is never better than the reward for giving a correct answer, which prevents models from losing accuracy.</p>
 
         <!-- Math Toggle Box -->
-        <div class="box" style="border: 1px solid #ccc; padding: 1.5rem;">
+        <div class="box" style="border: 1px solid #ccc; padding: 1.5rem; position: relative;">
+          <a href="#top" style="position: absolute; top: 10px; right: 10px; font-size: 0.8rem;">Back to Top</a>
           <!-- Tabs -->
           <div class="tabs is-toggle is-toggle-rounded is-centered mb-4">
             <ul>
@@ -578,91 +549,10 @@
   }
 </script>
 
-
-
-
-<!-- MathJax -->
-<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-<!-- Style for fade and tabs -->
-<style>
-  .fade-math {
-    transition: opacity 0.4s ease;
-  }
-  .is-hidden {
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-    pointer-events: none;
-    position: absolute;
-  }
-  .math-view {
-    opacity: 1;
-    position: relative;
-  }
-</style>
-
-<!-- JavaScript Logic -->
-<script>
-  function showMath(mode) {
-    const intuitiveTab = document.getElementById('tab-intuitive');
-    const symbolicTab = document.getElementById('tab-symbolic');
-    const intuitiveMath = document.getElementById('intuitive-math');
-    const symbolicMath = document.getElementById('symbolic-math');
-
-    if (mode === 'intuitive') {
-      intuitiveTab.classList.add('is-active');
-      symbolicTab.classList.remove('is-active');
-      intuitiveMath.classList.remove('is-hidden');
-      symbolicMath.classList.add('is-hidden');
-    } else {
-      symbolicTab.classList.add('is-active');
-      intuitiveTab.classList.remove('is-active');
-      symbolicMath.classList.remove('is-hidden');
-      intuitiveMath.classList.add('is-hidden');
-    }
-
-    if (window.MathJax) MathJax.typeset();
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <section id="results" class="section" style="font-family: 'DM Sans', sans-serif;">
   <div class="container">
-    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem;">
+    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem; position: relative;">
+      <a href="#top" style="position: absolute; top: 10px; right: 10px; font-size: 0.8rem;">Back to Top</a>
       <h2 class="title is-3 has-text-centered">Results 📊</h2>
 
       <p>
@@ -675,24 +565,17 @@
         <li>✨ <strong>RLVR degrades calibration</strong> in OOD tasks, while <strong>RLCR significantly improves it</strong>.</li>
       </ul>
 
-    <div class="image-container" style="text-align: center; margin: 20px 0;">
+      <div class="image-container" style="text-align: center; margin: 20px 0;">
         <img src="assets/images/results.jpeg" alt="Results Chart" style="max-width: 100%; height: auto;">
-    </div>
+      </div>
     </div>
   </div>
 </section>
 
-
-
-
-
-
-
-
-
 <section id="test-time-scaling" class="section" style="font-family: 'DM Sans', sans-serif;">
   <div class="container">
-    <div class="box has-text-centered" style="border: 1px solid #ccc; padding: 1.5rem;">
+    <div class="box has-text-centered" style="border: 1px solid #ccc; padding: 1.5rem; position: relative;">
+      <a href="#top" style="position: absolute; top: 10px; right: 10px; font-size: 0.8rem;">Back to Top</a>
       <h2 class="title is-3">Can confidence scores help at test time? 🚀</h2>
 
       <p>
@@ -709,21 +592,17 @@
         These strategies yield <strong>better accuracy and calibration</strong> as compute scales. 📈
       </p>
 
-    <div class="image-container" style="text-align: center; margin: 20px 0;">
+      <div class="image-container" style="text-align: center; margin: 20px 0;">
         <img src="assets/images/inf_scaling.png" alt="Inference Scaling Strategies" style="max-width: 100%; height: auto;">
-    </div>
+      </div>
     </div>
   </div>
 </section>
 
-
-
-
-
-
 <section id="uncertainty-cot" class="section" style="font-family: 'DM Sans', sans-serif;">
   <div class="container">
-    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem;">
+    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem; position: relative;">
+      <a href="#top" style="position: absolute; top: 10px; right: 10px; font-size: 0.8rem;">Back to Top</a>
       <h2 class="title is-3 has-text-centered">Does Explicitly Reasoning About Uncertainty Help? 🧠</h2>
 
       <p>
@@ -746,20 +625,13 @@
 
       <div class="image-container" style="text-align: center; margin: 20px 0;">
         <img src="assets/images/classifier.png" alt="Classifier Results" style="max-width: 100%; height: auto;">
-    </div>
-
+      </div>
     </div>
   </div>
 </section>
 
-
-
-
-
-
-
-
-<section class="section" id="BibTeX" style="font-family: 'DM Sans', sans-serif; border: 1px solid #ccc; border-radius: 8px; padding: 1.5rem;">
+<section class="section" id="BibTeX" style="font-family: 'DM Sans', sans-serif; border: 1px solid #ccc; border-radius: 8px; padding: 1.5rem; position: relative;">
+  <a href="#top" style="position: absolute; top: 10px; right: 10px; font-size: 0.8rem;">Back to Top</a>
   <div class="container is-max-desktop content">
     <h2 class="title" style="text-align: center;">BibTeX</h2>
     <pre style="background-color: #bbb9b98b; padding: 15px; border-radius: 5px; border: 1px solid #ccc;"><code>@misc{damani2025binaryrewardstraininglms,
@@ -774,25 +646,22 @@
   </div>
 </section>
 
-
 <br><br>
 
-<section class="section" id="Code" style="font-family: 'DM Sans', sans-serif; border: 1px solid #ccc; border-radius: 8px; padding: 1.5rem;">
+<section class="section" id="Code" style="font-family: 'DM Sans', sans-serif; border: 1px solid #ccc; border-radius: 8px; padding: 1.5rem; position: relative;">
+  <a href="#top" style="position: absolute; top: 10px; right: 10px; font-size: 0.8rem;">Back to Top</a>
   <div class="container is-max-desktop content">
     <h2 class="title" style="text-align: center;">Code</h2>
-  <div class="columns">
-    <div class="column">
-      <img src="https://github-readme-stats.vercel.app/api/pin/?username=damanimehul&repo=RLCR" alt="RLCR repo card" />
-    </div>
-    <div class="column">
-      <p><br>For all code, models, and data, check out the <a href="https://github.com/damanimehul/RLCR">RLCR GitHub Repo</a>. We provide a detailed README with instructions for setting up, training, and evaluating the model.</p>
+    <div class="columns">
+      <div class="column">
+        <img src="https://github-readme-stats.vercel.app/api/pin/?username=damanimehul&repo=RLCR" alt="RLCR repo card" />
+      </div>
+      <div class="column">
+        <p><br>For all code, models, and data, check out the <a href="https://github.com/damanimehul/RLCR">RLCR GitHub Repo</a>. We provide a detailed README with instructions for setting up, training, and evaluating the model.</p>
+      </div>
     </div>
   </div>
-  </div>
-
-
 </section>
-
 
 </body>
 </html>
