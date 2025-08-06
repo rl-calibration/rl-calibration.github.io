@@ -47,31 +47,75 @@ const examples = [
         title: "Example - Trivia",
         question: "What is worn around the neck in a ‘gurning’ contest? \n Ground Truth Answer: Horse Collar",
         content: `
+          <!-- RLCR -->
           <div class="box" style="background-color: #fceef5;">
             <p><strong>RLCR (ours)</strong></p>
-            <p><div class="scroll-box"><span class="tag-label">&lt;think&gt;</span><br> In a 'gurning' contest, participants compete to make the most exaggerated and grotesque facial expressions, with the neck being a key area for movement and expression. The term "gurning" itself is derived from the word "gurn," which means to make a grotesque or contorted face. In such contests, the neck is often the focal point because it allows for a wide range of movements that can enhance the visual impact of the facial expression. The neck can be twisted, bent, and contorted in various ways to create the most extreme and humorous expressions. The contestant who can achieve the most exaggerated and entertaining neck movement or contortion is typically the winner. This type of contest is often seen in pub quizzes, village fetes, or other informal gatherings where humor and entertainment are the main goals. The neck is the primary area of focus because it is the most visible and flexible part of the face, allowing for a wide range of movements that can be easily exaggerated and observed by the audience. <br><span class="tag-label">&lt;/think&gt;</span></div></p>
-            <div class="gray-box"><span class="tag-label">&lt;answer&gt;</span> scarf <span class="tag-label">&lt;/answer&gt;</span></div>
-            <p><div class="scroll-box"><span class="tag-label">&lt;analysis&gt;</span><br> Upon reviewing the solution, I notice that the reasoning provided in the <div class="scroll-box"><span class="tag-label">&lt;think&gt;</span><br> section is logical and coherent, explaining why the neck is the focal point in a gurning contest. The answer "scarf" is not supported by the reasoning, as the reasoning does not mention a scarf at all. The reasoning focuses on the neck as the area of movement and expression, but the answer does not align with the context of the question, which asks what is worn around the neck. The answer "scarf" is not mentioned or justified in the reasoning process, and the reasoning does not lead to this conclusion. The answer seems arbitrary and does not flow from the reasoning provided, making the solution unclear and incorrect. The confidence level should be low due to the lack of connection between the reasoning and the answer, and the introduction of an unrelated item (scarf) that is not supported by the context. <br><span class="tag-label">&lt;/analysis&gt;</span></div></p>
-            <div class="gray-box"><span class="tag-label">&lt;confidence&gt;</span> 0.2 <span class="tag-label">&lt;/confidence&gt;</span></div>
+      
+            <div class="scroll-box">
+              <span class="tag-label">&lt;think&gt;</span><br>
+              In a 'gurning' contest, participants compete to make the most exaggerated and grotesque facial expressions, with the neck being a key area for movement and expression. The term "gurning" itself is derived from the word "gurn," which means to make a grotesque or contorted face. In such contests, the neck is often the focal point because it allows for a wide range of movements that can enhance the visual impact of the facial expression. The neck can be twisted, bent, and contorted in various ways to create the most extreme and humorous expressions. The contestant who can achieve the most exaggerated and entertaining neck movement or contortion is typically the winner. This type of contest is often seen in pub quizzes, village fetes, or other informal gatherings where humor and entertainment are the main goals. The neck is the primary area of focus because it is the most visible and flexible part of the face, allowing for a wide range of movements that can be easily exaggerated and observed by the audience.
+              <br><span class="tag-label">&lt;/think&gt;</span>
+            </div>
+      
+            <div class="gray-box">
+              <span class="tag-label">&lt;answer&gt;</span> scarf <span class="tag-label">&lt;/answer&gt;</span>
+            </div>
+      
+            <div class="scroll-box">
+              <span class="tag-label">&lt;analysis&gt;</span><br>
+              Upon reviewing the solution, I notice that the reasoning provided in the section is logical and coherent, explaining why the neck is the focal point in a gurning contest. The answer "scarf" is not supported by the reasoning, as the reasoning does not mention a scarf at all. The reasoning focuses on the neck as the area of movement and expression, but the answer does not align with the context of the question, which asks what is worn around the neck. The answer "scarf" is not mentioned or justified in the reasoning process, and the reasoning does not lead to this conclusion. The answer seems arbitrary and does not flow from the reasoning provided, making the solution unclear and incorrect. The confidence level should be low due to the lack of connection between the reasoning and the answer, and the introduction of an unrelated item (scarf) that is not supported by the context.
+              <br><span class="tag-label">&lt;/analysis&gt;</span>
+            </div>
+      
+            <div class="gray-box">
+              <span class="tag-label">&lt;confidence&gt;</span> 0.2 <span class="tag-label">&lt;/confidence&gt;</span>
+            </div>
           </div>
+      
+          <!-- RLVR -->
           <div class="box" style="background-color: #e6f0ff;">
             <p><strong>RLVR</strong></p>
-            <p><div class="scroll-box"><span class="tag-label">&lt;think&gt;</span><br> In a "gurning" contest, participants typically wear a necktie or a scarf around their neck. The purpose of this attire is to provide a clear and visible target for the judges to evaluate the contortion of the neck and face during the competition.
-    
-    Gurning is a form of competitive facial expression where participants attempt to make the most exaggerated and grotesque faces possible. The necktie or scarf helps in highlighting the movements and contortions of the neck, making it easier for the judges to assess the contestants' performance.
-    
-    Therefore, the item worn around the neck in a gurning contest is a necktie or a scarf. <br><span class="tag-label">&lt;/think&gt;</span></div></p>
-            <div class="gray-box"><span class="tag-label">&lt;answer&gt;</span> necktie or a scarf <span class="tag-label">&lt;/answer&gt;</span></div>
-            <div class="gray-box"><span class="tag-label">&lt;confidence&gt;</span> 1.0 <span class="tag-label">&lt;/confidence&gt;</span></div>
+      
+            <div class="scroll-box">
+              <span class="tag-label">&lt;think&gt;</span><br>
+              In a "gurning" contest, participants typically wear a necktie or a scarf around their neck. The purpose of this attire is to provide a clear and visible target for the judges to evaluate the contortion of the neck and face during the competition.
+      
+              Gurning is a form of competitive facial expression where participants attempt to make the most exaggerated and grotesque faces possible. The necktie or scarf helps in highlighting the movements and contortions of the neck, making it easier for the judges to assess the contestants' performance.
+      
+              Therefore, the item worn around the neck in a gurning contest is a necktie or a scarf.
+              <br><span class="tag-label">&lt;/think&gt;</span>
+            </div>
+      
+            <div class="gray-box">
+              <span class="tag-label">&lt;answer&gt;</span> necktie or a scarf <span class="tag-label">&lt;/answer&gt;</span>
+            </div>
+      
+            <div class="gray-box">
+              <span class="tag-label">&lt;confidence&gt;</span> 1.0 <span class="tag-label">&lt;/confidence&gt;</span>
+            </div>
           </div>
+      
+          <!-- Qwen7B Base -->
           <div class="box" style="background-color: #fff8dc;">
             <p><strong>Qwen7B Base</strong></p>
-            <p><div class="scroll-box"><span class="tag-label">&lt;think&gt;</span><br> I need to recall information about gurning contests and the attire associated with them. Gurning is a traditional English folk game where participants try to make the most grotesque facial expressions. The attire worn during these contests is typically a necktie or a scarf. <br><span class="tag-label">&lt;/think&gt;</span></div></p>
-            <div class="gray-box"><span class="tag-label">&lt;answer&gt;</span> A necktie or a scarf <span class="tag-label">&lt;/answer&gt;</span></div>
-            <div class="gray-box"><span class="tag-label">&lt;confidence&gt;</span> 0.95 <span class="tag-label">&lt;/confidence&gt;</span></div>
+      
+            <div class="scroll-box">
+              <span class="tag-label">&lt;think&gt;</span><br>
+              I need to recall information about gurning contests and the attire associated with them. Gurning is a traditional English folk game where participants try to make the most grotesque facial expressions. The attire worn during these contests is typically a necktie or a scarf.
+              <br><span class="tag-label">&lt;/think&gt;</span>
+            </div>
+      
+            <div class="gray-box">
+              <span class="tag-label">&lt;answer&gt;</span> A necktie or a scarf <span class="tag-label">&lt;/answer&gt;</span>
+            </div>
+      
+            <div class="gray-box">
+              <span class="tag-label">&lt;confidence&gt;</span> 0.95 <span class="tag-label">&lt;/confidence&gt;</span>
+            </div>
           </div>
         `
       },
+      
       
     {
       title: "Example - Trivia",
