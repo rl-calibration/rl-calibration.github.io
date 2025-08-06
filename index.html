@@ -202,114 +202,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-<script src="examples-content.js"></script>
-
-
-
-
-<section class="section">
-  <div class="container">
-    
-    <!-- Gray Question Box -->
-    <div id="question-box" class="box" style="background-color: #f5f5f5;">
-      <p id="question-text">Loading...</p>
-    </div>
-
-    <div class="columns">
-      <!-- Main Viewing Area -->
-      <div class="column is-9">
-        <div id="viewer-content" class="box" style="min-height: 500px;">
-          <!-- Dynamic content inserted here -->
-        </div>
-      </div>
-
-      <!-- Sidebar Navigation -->
-      <div class="column is-3">
-        <aside class="menu">
-          <p class="menu-label">Examples</p>
-          <ul class="menu-list" id="example-list">
-            <!-- List items populated by JS -->
-          </ul>
-        </aside>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script>
-  // Ensure examples array is available from examples-content.js
-  if (typeof examples === 'undefined') {
-    console.error("The 'examples' array is not loaded. Make sure examples-content.js is included.");
-  } else {
-    const questionBox = document.getElementById('question-text');
-    const viewerContent = document.getElementById('viewer-content');
-    const exampleList = document.getElementById('example-list');
-
-    function loadExample(index) {
-  const ex = examples[index];
-
-  // Split question and ground truth answer (separated by newline in original format)
-  const parts = ex.question.split('\n');
-  const questionLine = parts[0].trim();
-  const groundTruthLine = parts.length > 1 ? parts[1].trim() : "";
-
-  // Insert into question box
-  const questionBox = document.getElementById('question-text');
-  questionBox.innerHTML = `<strong>Question:</strong> ${questionLine}<br><strong>Ground Truth Answer:</strong> ${groundTruthLine.replace('Ground Truth Answer: ', '')}`;
-
-  // Insert viewer content
-  const viewerContent = document.getElementById('viewer-content');
-  viewerContent.innerHTML = ex.content;
-
-  // Highlight selected example
-  document.querySelectorAll('.example-link').forEach(link => link.classList.remove('is-active'));
-  const activeLink = document.querySelector(`[data-index="${index}"]`);
-  if (activeLink) activeLink.classList.add('is-active');
-}
-
-
-    // Populate sidebar
-    examples.forEach((ex, i) => {
-      const li = document.createElement('li');
-      li.innerHTML = `<a href="#" class="example-link ${i === 0 ? 'is-active' : ''}" data-index="${i}">${ex.title}</a>`;
-      exampleList.appendChild(li);
-    });
-
-    // Setup listeners
-    document.querySelectorAll('.example-link').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const index = parseInt(e.target.getAttribute('data-index'));
-        loadExample(index);
-      });
-    });
-
-    // Load first example
-    loadExample(0);
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 <section id="why-rlcr" class="section" style="font-family: 'DM Sans', sans-serif;">
   <div class="container">
     <div class="box" style="border: 1px solid #ccc; padding: 1.5rem;">
@@ -355,6 +247,126 @@
     </div>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="examples-content.js"></script>
+
+
+
+
+<section class="section" style="font-family: 'DM Sans', sans-serif;">
+  <div class="container">
+    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem;">
+  <h2 class="title is-3 has-text-centered">Examples</h2>
+  <div class="container">
+    
+    <!-- Gray Question Box -->
+    <div id="question-box" class="box" style="background-color: #f5f5f5;">
+      <div id="question-text">Loading...</div>
+    </div>
+    
+
+    <div class="columns">
+      <!-- Main Viewing Area -->
+      <div class="column is-9">
+        <div id="viewer-content" class="box" style="min-height: 500px;">
+          <!-- Dynamic content inserted here -->
+        </div>
+      </div>
+
+      <!-- Sidebar Navigation -->
+      <div class="column is-3">
+        <aside class="menu">
+          <p class="menu-label">Examples</p>
+          <ul class="menu-list" id="example-list">
+            <!-- List items populated by JS -->
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Ensure examples array is available from examples-content.js
+  if (typeof examples === 'undefined') {
+    console.error("The 'examples' array is not loaded. Make sure examples-content.js is included.");
+  } else {
+    const questionBox = document.getElementById('question-text');
+    const viewerContent = document.getElementById('viewer-content');
+    const exampleList = document.getElementById('example-list');
+
+    function loadExample(index) {
+  const ex = examples[index];
+
+  const parts = ex.question.split('\n');
+  const questionLine = parts[0].trim();
+  const groundTruthLine = parts.length > 1 ? parts[1].trim() : "";
+
+  // Better rendering: no <strong> wrapping inline LaTeX
+  const questionBox = document.getElementById('question-text');
+  questionBox.innerHTML = `
+    <div><strong>Question:</strong> <span class="math-question">${questionLine}</span></div>
+    <div><strong>Ground Truth Answer:</strong> <span class="math-answer">${groundTruthLine.replace('Ground Truth Answer: ', '')}</span></div>
+  `;
+
+  const viewerContent = document.getElementById('viewer-content');
+  viewerContent.innerHTML = ex.content;
+
+  // Highlight active link
+  document.querySelectorAll('.example-link').forEach(link => link.classList.remove('is-active'));
+  const activeLink = document.querySelector(`[data-index="${index}"]`);
+  if (activeLink) activeLink.classList.add('is-active');
+
+  // Force MathJax to re-typeset all updated math
+  if (window.MathJax) {
+    MathJax.typeset();
+  }
+}
+
+
+
+
+    // Populate sidebar
+    examples.forEach((ex, i) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="#" class="example-link ${i === 0 ? 'is-active' : ''}" data-index="${i}">${ex.title}</a>`;
+      exampleList.appendChild(li);
+    });
+
+    // Setup listeners
+    document.querySelectorAll('.example-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const index = parseInt(e.target.getAttribute('data-index'));
+        loadExample(index);
+      });
+    });
+
+    // Load first example
+    loadExample(0);
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
 
 
 

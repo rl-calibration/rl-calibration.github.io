@@ -150,7 +150,7 @@ const examples = [
 
     {
       title: "Example - Math",
-      question: "At 50 miles per hour, how far would a car travel in $2\\frac{3}{4}$ hours? Express your answer as a mixed number. \n Ground Truth Answer: 137 \\frac{1}{2}",
+      question: "At 50 miles per hour, how far would a car travel in \\(2\\frac{3}{4}\\) hours? Express your answer as a mixed number. \n Ground Truth Answer: \\(137\\frac{1}{2}\\)",
       content: `
         <div class="box" style="background-color: #fceef5;">
           <p><strong>RLCR (ours)</strong></p>
