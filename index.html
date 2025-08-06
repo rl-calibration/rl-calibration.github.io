@@ -31,6 +31,24 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+
+
+  <style>
+    .scroll-box {
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+      padding: 12px;
+      margin: 10px 0;
+      border-left: 4px solid #ccc;
+      font-family: inherit; /* ← Uses same font as surrounding text */
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+  </style>
+  
+
+
 </head>
 
 
@@ -148,6 +166,11 @@
 
 
 
+<script src="examples-content.js"></script>
+
+
+
+
 <section class="section">
   <div class="container">
     
@@ -158,7 +181,6 @@
     </div>
 
     <div class="columns">
-      
       <!-- Main Viewing Area -->
       <div class="column is-9">
         <div id="viewer-content" class="box" style="min-height: 500px;">
@@ -180,117 +202,44 @@
 </section>
 
 <script>
-  const examples = [
-    {
-      title: "Example 1",
-      question: "Who was awarded the Oceanography Society’s Jerlov Award in 2018? (Ground Truth Answer: Annick Bricaud)",
-      content: `
-        <div class="box" style="background-color: #fceef5;">
-          <p><strong>RLCR (ours)</strong></p>
-          <p><code>&lt;think&gt;</code> The question asks who was awarded... <code>&lt;/think&gt;</code></p>
-          <p><strong>&lt;answer&gt;</strong> Dr. David W. Schiedek <strong>&lt;/answer&gt;</strong></p>
-          <p><code>&lt;analysis&gt;</code> The Oceanography Society’s website or other reliable sources... <code>&lt;/analysis&gt;</code></p>
-          <p><strong>&lt;confidence&gt;</strong> 0.25 <strong>&lt;/confidence&gt;</strong></p>
-        </div>
-        <div class="box" style="background-color: #e6f0ff;">
-          <p><strong>RLVR</strong></p>
-          <p><code>&lt;think&gt;</code> The question asks for the person who was awarded... <code>&lt;/think&gt;</code></p>
-          <p><strong>&lt;answer&gt;</strong> Laurence C. Smith <strong>&lt;/answer&gt;</strong></p>
-          <p><strong>&lt;confidence&gt;</strong> 100. <strong>&lt;/confidence&gt;</strong></p>
-        </div>
-        <div class="box" style="background-color: #fff8dc;">
-          <p><strong>Qwen-7B-Base</strong></p>
-          <p><code>&lt;think&gt;</code> To find out who was awarded... <code>&lt;/think&gt;</code></p>
-          <p><strong>&lt;answer&gt;</strong> Dr. Lisa Levin. <strong>&lt;/answer&gt;</strong></p>
-          <p><strong>&lt;confidence&gt;</strong> 0.95 <strong>&lt;/confidence&gt;</strong></p>
-        </div>
-      `
-    },
-    {
-      title: "Example 2",
-      question: "What is the capital city of Australia? (Ground Truth Answer: Canberra)",
-      content: `
-        <div class="box" style="background-color: #fceef5;">
-          <p><strong>RLCR (ours)</strong></p>
-          <p><code>&lt;think&gt;</code> The capital is often mistaken as Sydney or Melbourne... <code>&lt;/think&gt;</code></p>
-          <p><strong>&lt;answer&gt;</strong> Canberra <strong>&lt;/answer&gt;</strong></p>
-          <p><strong>&lt;confidence&gt;</strong> 0.98 <strong>&lt;/confidence&gt;</strong></p>
-        </div>
-        <div class="box" style="background-color: #e6f0ff;">
-          <p><strong>RLVR</strong></p>
-          <p><strong>&lt;answer&gt;</strong> Sydney <strong>&lt;/answer&gt;</strong></p>
-          <p><strong>&lt;confidence&gt;</strong> 0.87 <strong>&lt;/confidence&gt;</strong></p>
-        </div>
-        <div class="box" style="background-color: #fff8dc;">
-          <p><strong>Qwen-7B-Base</strong></p>
-          <p><strong>&lt;answer&gt;</strong> Canberra <strong>&lt;/answer&gt;</strong></p>
-          <p><strong>&lt;confidence&gt;</strong> 0.92 <strong>&lt;/confidence&gt;</strong></p>
-        </div>
-      `
-    },
-    {
-      title: "Example 3",
-      question: "Who painted the Mona Lisa? (Ground Truth Answer: Leonardo da Vinci)",
-      content: `
-        <div class="box" style="background-color: #fceef5;">
-          <p><strong>RLCR (ours)</strong></p>
-          <p><strong>&lt;answer&gt;</strong> Leonardo da Vinci <strong>&lt;/answer&gt;</strong></p>
-          <p><strong>&lt;confidence&gt;</strong> 0.99 <strong>&lt;/confidence&gt;</strong></p>
-        </div>
-        <div class="box" style="background-color: #e6f0ff;">
-          <p><strong>RLVR</strong></p>
-          <p><strong>&lt;answer&gt;</strong> Michelangelo <strong>&lt;/answer&gt;</strong></p>
-          <p><strong>&lt;confidence&gt;</strong> 0.85 <strong>&lt;/confidence&gt;</strong></p>
-        </div>
-        <div class="box" style="background-color: #fff8dc;">
-          <p><strong>Qwen-7B-Base</strong></p>
-          <p><strong>&lt;answer&gt;</strong> Leonardo da Vinci <strong>&lt;/answer&gt;</strong></p>
-          <p><strong>&lt;confidence&gt;</strong> 0.97 <strong>&lt;/confidence&gt;</strong></p>
-        </div>
-      `
-    },
-    // Add more examples (up to 10) here...
-  ];
+  // Ensure examples array is available from examples-content.js
+  if (typeof examples === 'undefined') {
+    console.error("The 'examples' array is not loaded. Make sure examples-content.js is included.");
+  } else {
+    const questionBox = document.getElementById('question-text');
+    const viewerContent = document.getElementById('viewer-content');
+    const exampleList = document.getElementById('example-list');
 
-  // Load viewer with first example
-  const questionBox = document.getElementById('question-text');
-  const viewerContent = document.getElementById('viewer-content');
-  const exampleList = document.getElementById('example-list');
+    function loadExample(index) {
+      const ex = examples[index];
+      questionBox.innerText = ex.question;
+      viewerContent.innerHTML = ex.content;
 
-  function loadExample(index) {
-    const ex = examples[index];
-    questionBox.innerText = ex.question;
-    viewerContent.innerHTML = ex.content;
+      document.querySelectorAll('.example-link').forEach(link => link.classList.remove('is-active'));
+      const activeLink = document.querySelector(`[data-index="${index}"]`);
+      if (activeLink) activeLink.classList.add('is-active');
+    }
 
-    // Highlight selected
-    document.querySelectorAll('.example-link').forEach(l => l.classList.remove('is-active'));
-    document.querySelector(`[data-index="${index}"]`).classList.add('is-active');
-  }
-
-  // Build sidebar links
-  examples.forEach((ex, i) => {
-    const li = document.createElement('li');
-    li.innerHTML = `<a href="#" class="example-link ${i === 0 ? 'is-active' : ''}" data-index="${i}">${ex.title}</a>`;
-    exampleList.appendChild(li);
-  });
-
-  // Setup event listeners
-  document.querySelectorAll('.example-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const index = parseInt(e.target.getAttribute('data-index'));
-      loadExample(index);
+    // Populate sidebar
+    examples.forEach((ex, i) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="#" class="example-link ${i === 0 ? 'is-active' : ''}" data-index="${i}">${ex.title}</a>`;
+      exampleList.appendChild(li);
     });
-  });
 
-  // Load initial
-  loadExample(0);
+    // Setup listeners
+    document.querySelectorAll('.example-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const index = parseInt(e.target.getAttribute('data-index'));
+        loadExample(index);
+      });
+    });
+
+    // Load first example
+    loadExample(0);
+  }
 </script>
-
-
-
-
-
 
 
 
