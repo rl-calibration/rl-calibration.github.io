@@ -116,7 +116,7 @@
         </div>
         <div class="ex-traces">
           ${traceBlock('Reasoning', 'think', m.traces.think)}
-          ${traceBlock('Uncertainty analysis', 'analysis', m.traces.analysis, 'is-analysis')}
+          ${traceBlock('Analysis', 'analysis', m.traces.analysis, 'is-analysis')}
         </div>
       </article>`;
   }

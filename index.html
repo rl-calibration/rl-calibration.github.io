@@ -1,6 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+  <script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+
+
   <meta charset="utf-8">
   <meta name="description"
         content="Beyond Binary Rewards: RL for Calibrated LMs">
@@ -8,30 +14,111 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Beyond Binary Rewards: RL for Calibrated LMs</title>
 
-  <script>
-    window.MathJax = {
-      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
-      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
-    };
-  </script>
-  <script type="text/javascript" id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
-
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="stylesheet" href="./static/css/site.css">
-  <link rel="icon" href="assets/images/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/examples.css">
+  <link rel="stylesheet" href="./static/css/toc.css">
+  <link rel="stylesheet" href="./static/css/bibtex.css">
+  <link rel="icon" href="./static/images/favicon.svg">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+
+
+  
+
+
+
+  <style>
+    .scroll-box {
+      max-height: 9em; /* 4 lines * 1.5em line-height */
+      overflow-y: scroll;
+      background-color: #f9f9f9;
+      padding: 12px;
+      margin: 10px 0;
+      border-left: 4px solid #ccc;
+      font-family: inherit;
+      white-space: pre-wrap;
+      line-height: 1;
+      scrollbar-gutter: stable;
+      font-size: 0.85em; /* smaller font */
+
+    }
+
+    .tag-label {
+      font-weight: bold;
+      color: #333;
+    }
+  
+    /* Optional: customize scrollbar for WebKit browsers */
+    .scroll-box::-webkit-scrollbar {
+      width: 8px;
+    }
+  
+    .scroll-box::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 4px;
+    }
+  
+    .scroll-box::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .math-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+  </style>
+  
+  
+  <style>
+    .gray-box {
+      background-color: #f5f5f5;
+      padding: 12px;
+      margin: 10px 0;
+      border-left: 4px solid #bbb;
+      font-family: inherit;
+      line-height: 1;
+      font-size: 0.85em; /* smaller font */
+
+    }
+  
+    .tag-label {
+      font-weight: bold;
+      color: #333;
+    }
+
+
+    .menu-list a {
+  font-size: 0.95em;
+  padding: 0.4em 0;
+}
+.menu-label {
+  font-size: 0.8em;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+  </style>
+  
+
 </head>
 
 
@@ -157,67 +244,90 @@
 </section>
 
 
-<main class="rl">
 
-  <nav class="rl-nav" aria-label="Sections">
-    <a class="rl-nav-brand" href="#top"><img src="assets/images/logo.png" alt=""><span>RLCR</span></a>
-    <div class="rl-nav-links">
-      <a href="#intro">Intro</a>
-      <a href="#examples">Examples</a>
-      <a href="#method">Method</a>
-      <a href="#results">Results</a>
-      <a href="#test-time-scaling">Test-time scaling</a>
-      <a href="#uncertainty-cot">Uncertainty CoT</a>
-      <a href="#BibTeX">BibTeX</a>
-      <a href="#Code">Code</a>
-      <a href="#Slides">Slides</a>
+
+
+
+<br><br>
+
+
+<div class="columns is-vcentered">
+  <!-- Image Column: Grows to take remaining space -->
+  <div class="column">
+    <div class="image-container" style="text-align: center;">
+      <img src="assets/images/main_fig1.jpg" alt="Main Figure 1" style="max-width: 90%; height: auto;">
     </div>
-  </nav>
+  </div>
 
-  <figure class="rl-figure is-teaser">
-    <img src="assets/images/main_fig1.jpg" alt="Overview of RLCR: the model reasons about the task and its own uncertainty, outputting an answer and a calibrated confidence.">
-  </figure>
-
-  <!-- ============ Intro ============ -->
-  <section id="intro" class="rl-section">
-    <div class="rl-section-head">
-      <span class="rl-eyebrow">Intro</span>
-      <h2>Rewarding correctness alone makes models overconfident</h2>
+  <!-- Narrow TOC Column -->
+  <div class="column is-narrow" style="max-width: 180px; padding-left: 1rem; border-left: 1px solid #ccc;">
+    <div class="table-of-contents">
+      <h3><strong><u>Table of Contents</u></strong></h3>
+      <ul>
+        <li><a href="#why-rlcr">Intro</a></li>
+        <li><a href="#examples">Examples</a></li>
+        <li><a href="#our-idea">Method</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#test-time-scaling">Test-Time Scaling</a></li>
+        <li><a href="#uncertainty-cot">Uncertainty CoT</a></li>
+        <li><a href="#BibTeX">BibTeX</a></li>
+        <li><a href="#Code">Code</a></li>
+        <li><a href="#Slides">Talk Slides</a></li>
+      </ul>
     </div>
+  </div>
+</div>
 
-    <div class="rl-intro">
-      <div>
+
+
+
+
+
+<section id="why-rlcr" class="section" style="font-family: 'DM Sans', sans-serif;">
+  <div class="container">
+    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem; position: relative;">
+      <h2 class="title" style="text-align: center;">Intro</h2>
+
+      <div class="content">
+        <!-- Float image right with appropriate styling -->
+        <img src="assets/images/exampleOutputs.jpg" alt="Example Outputs"
+             style="float: right; width: 70%; margin-left: 20px; margin-bottom: 10px; max-width: 100%; height: auto;">
+
         <p>
           Recent advances in reasoning training — particularly <strong>RL with verifiable rewards (RLVR)</strong> — have improved the accuracy of large language models (LLMs). These approaches optimize for correctness, encouraging models to output the right answer when possible.
         </p>
+
         <p>
-          However, these same methods tend to produce <strong>overconfident models</strong> that are more prone to <strong>hallucination</strong>.
-          Because the reward signal focuses solely on final answer correctness, models are incentivized to guess — even when they are uncertain.
+          However, these same methods tend to produce <strong>overconfident models</strong> that are more prone to <strong>hallucination</strong>. 
+          Because the reward signal focuses solely on final answer correctness, models are incentivized to guess — even when they are uncertain. 
           This is especially problematic in high-stakes settings like <strong>healthcare</strong> and <strong>law</strong>, where confident errors can be harmful or even dangerous.
         </p>
+
         <p>
           <strong>RLCR</strong> addresses this gap. We introduce a reinforcement learning framework that trains models to reason about their own uncertainty — rewarding not just accuracy, but also calibrated confidence.
-          Instead of encouraging blind certainty, RLCR incentivizes models to <em>reflect</em>, evaluate their own outputs, and communicate uncertainty when appropriate.
         </p>
-        <div class="rl-pills">
-          <span class="rl-pill"><i class="fas fa-trophy"></i>Higher accuracy</span>
-          <span class="rl-pill"><i class="fas fa-bullseye"></i>Better calibration</span>
-        </div>
-        <p style="margin-top: 18px;">
+
+        <p>
+          Instead of encouraging blind certainty, RLCR incentivizes models to <em>reflect</em>, evaluate their own outputs, and communicate uncertainty when appropriate.
+          The result is a model that performs better <strong>(higher accuracy ✅)</strong> and knows when it's likely to be wrong <strong>(better calibration 🎯)</strong>.
+        </p>
+
+        <p>
           In domains where trust, safety, and interpretability matter, this dual optimization — getting the right answer, and knowing when you might not — makes all the difference.
         </p>
       </div>
-      <figure class="rl-figure">
-        <img src="assets/images/exampleOutputs.jpg" alt="Example outputs from RLCR compared to RLVR">
-      </figure>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============ Examples ============ -->
-  <section id="examples" class="rl-section">
+<script src="examples-content.js"></script>
+
+<section class="section" id="examples" style="font-family: 'DM Sans', sans-serif;">
+  <div class="container">
+    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem; position: relative;">
+      <h2 class="title is-3 has-text-centered">Examples</h2>
+      <div class="rl">
     <div class="rl-section-head">
-      <span class="rl-eyebrow">Examples</span>
-      <h2>RLCR in action</h2>
       <p class="rl-lede">Compare answers and confidence from RLCR, RLVR, and the base model on the same question. Expand a card to read its full reasoning trace.</p>
     </div>
 
@@ -246,268 +356,384 @@
         <button type="button" class="ex-toggle-all" id="ex-toggle-all">Expand all reasoning</button>
       </div>
     </div>
-  </section>
-
-  <!-- ============ Method ============ -->
-  <section id="method" class="rl-section">
-    <span id="our-idea"></span>
-    <div class="rl-section-head">
-      <span class="rl-eyebrow">Method</span>
-      <h2>Reward being right <em>and</em> knowing when you're right</h2>
-      <p class="rl-lede">RLCR makes a simple shift: instead of rewarding only correctness, we reward both accuracy and calibrated confidence.</p>
-    </div>
-
-    <div class="rl-grid cols-3">
-      <div class="rl-card">
-        <span class="rl-card-icon"><i class="fas fa-bullseye"></i></span>
-        <h3>Right, and sure of it</h3>
-        <p>We reward models for being right <em>and</em> for knowing when they're right.</p>
-      </div>
-      <div class="rl-card">
-        <span class="rl-card-icon"><i class="fas fa-layer-group"></i></span>
-        <h3>Uncertainty in training</h3>
-        <p>The model reflects on its own uncertainty while solving the task, producing an answer and a confidence estimate.</p>
-      </div>
-      <div class="rl-card">
-        <span class="rl-card-icon"><i class="fas fa-balance-scale"></i></span>
-        <h3>A simple reward tweak</h3>
-        <p>Confidently wrong or uncertainly right responses are penalized — so models learn not just what to answer, but how sure to be.</p>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="rl-eq">
-      <div class="rl-eq-head">
-        <span>Reward functions</span>
-        <div class="rl-seg" role="tablist" aria-label="Equation form">
-          <button type="button" role="tab" aria-selected="true" data-eq="intuitive">Intuitive</button>
-          <button type="button" role="tab" aria-selected="false" data-eq="symbolic">Symbolic</button>
-        </div>
-      </div>
-      <div class="rl-eq-body" data-eq-panel="intuitive">
-        <div class="rl-eq-row">
-          <span class="rl-eq-label">RLVR</span>
-          <div class="rl-eq-math">$$ R_{\text{RLVR}} = \text{Correctness} = \mathbb{1}(\text{prediction} = \text{label}) $$</div>
-        </div>
-        <div class="rl-eq-row is-ours">
-          <span class="rl-eq-label">RLCR (ours)</span>
-          <div class="rl-eq-math">$$ R_{\text{RLCR}} = \text{Correctness} - \left( \text{Confidence} - \text{Correctness} \right)^2 $$</div>
-        </div>
-        <p class="rl-eq-note">
-          <strong>Correctness</strong> is 1 if the prediction is correct, 0 otherwise; <strong>Confidence</strong> is the model’s self-estimated probability that its prediction is correct.
+<script src="static/js/examples.js"></script>
+
+<section id="our-idea" class="section" style="font-family: 'DM Sans', sans-serif;">
+  <div class="container">
+    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem; position: relative;">
+      <h2 class="title is-3" style="text-align: center;" id="our-idea">Method</h2>
+
+      <div class="content">
+        <p><strong>RLCR makes a simple shift:</strong> instead of rewarding only correctness, we reward both accuracy and calibrated confidence.</p>
+
+        <ul>
+          <li>💡 <strong>We reward models for being right <em>and</em> for knowing when they're right.</strong></li>
+          <li>💡 <strong>We move uncertainty reasoning into training</strong> — teaching the model to reflect on its own uncertainty while solving the task.</li>
+          <li>💡 <strong>With a simple tweak to the reward function</strong>, RLCR enables LLMs to improve both performance and self-awareness.</li>
+        </ul>
+
+        <p>
+          During training, the model reasons jointly about the <strong>task</strong> and its own <strong>uncertainty</strong>, 
+          producing both an <strong>answer</strong> and a <strong>confidence estimate</strong>.
         </p>
-      </div>
-      <div class="rl-eq-body" data-eq-panel="symbolic" hidden>
-        <div class="rl-eq-row">
-          <span class="rl-eq-label">RLVR</span>
-          <div class="rl-eq-math">$$ R_{\text{RLVR}} = \mathbb{1}(\hat{y} = y) $$</div>
-        </div>
-        <div class="rl-eq-row is-ours">
-          <span class="rl-eq-label">RLCR (ours)</span>
-          <div class="rl-eq-math">$$ R_{\text{RLCR}} = \mathbb{1}(\hat{y} = y) - \left( \hat{q} - \mathbb{1}(\hat{y} = y) \right)^2 $$</div>
-        </div>
-        <p class="rl-eq-note">
-          \( \hat{y} \) is the model’s prediction, \( y \) is the ground truth, and \( \hat{q} \) is the model’s confidence estimate.
+
+        <p>
+          Our reward combines two terms:
         </p>
+
+        <ul>
+          <li>🎯 <strong>Correctness</strong> — Is the answer right?</li>
+          <li>📏 <strong>Calibration</strong> — Does the confidence reflect actual correctness?</li>
+        </ul>
+
+        <p>
+          Confidently wrong or uncertainly right responses are penalized. This encourages models to learn not just what to answer, but how sure to be.
+        </p>
+
+        <div class="columns is-centered mt-5">
+          <div class="column has-text-centered">
+            <img src="assets/images/reward_fns.jpeg" alt="Reward Functions" style="max-width: 100%;">
+          </div>
+        </div>
+        <p>In RLCR, the reward for giving an incorrect answer is never better than the reward for giving a correct answer, which prevents models from losing accuracy.</p>
+
+        <!-- Math Toggle Box -->
+        <div class="box" style="border: 1px solid #ccc; padding: 1.5rem; position: relative;">
+          <!-- Tabs -->
+          <div class="tabs is-toggle is-toggle-rounded is-centered mb-4">
+            <ul>
+              <li class="is-active" id="tab-intuitive" onclick="showMath('intuitive')"><a>Intuitive Equation</a></li>
+              <li id="tab-symbolic" onclick="showMath('symbolic')"><a>Symbolic Equation</a></li>
+            </ul>
+          </div>
+
+          <!-- Math Content -->
+          <div id="intuitive-math" class="math-view fade-math">
+            <p><strong>Traditional RLVR reward:</strong></p>
+            <div class="math-scroll">
+              <p>$$
+              R_{\text{RLVR}} = \text{Correctness} = \mathbb{1}(\text{prediction} = \text{label})
+              $$</p>
+            </div>
+
+            <p class="mt-4"><strong>RLCR reward:</strong></p>
+            <div class="math-scroll">
+              <p>$$
+              R_{\text{RLCR}} = \text{Correctness} - \left( \text{Confidence} - \text{Correctness} \right)^2
+              $$</p>
+            </div>
+
+            <p>
+              where <strong>Correctness</strong> is 1 if the prediction is correct, 0 otherwise; and <strong>Confidence</strong> is the model’s self-estimated probability that its prediction is correct.
+            </p>
+          </div>
+
+          <div id="symbolic-math" class="math-view fade-math is-hidden">
+            <p><strong>Traditional RLVR reward:</strong></p>
+            <div class="math-scroll">
+              <p>$$
+              R_{\text{RLVR}} = \mathbb{1}(\hat{y} = y)
+              $$</p>
+            </div>
+
+            <p class="mt-4"><strong>RLCR reward:</strong></p>
+            <div class="math-scroll">
+              <p>$$
+              R_{\text{RLCR}} = \mathbb{1}(\hat{y} = y) - \left( \hat{q} - \mathbb{1}(\hat{y} = y) \right)^2
+              $$</p>
+            </div>
+
+            <p>
+              where \( \hat{y} \) is the model’s prediction, \( y \) is the ground truth, and \( \hat{q} \) is the model’s confidence estimate.
+            </p>
+          </div>
+        </div>
       </div>
+
+      <br>
+      <p><strong>What We Prove:</strong></p>
+      <p>✅ RLCR provably optimizes for both accuracy & calibration.</p>
+      <p>✅ Calibration comes at no cost to accuracy.</p>
+      <p>✅ Works with any bounded proper scoring rule — we use the Brier score.</p>
     </div>
+</section>
 
-    <figure class="rl-figure">
-      <img src="assets/images/reward_fns.jpeg" alt="Reward as a function of confidence for correct and incorrect answers">
-      <figcaption>In RLCR, the reward for giving an incorrect answer is never better than the reward for giving a correct answer, which prevents models from losing accuracy.</figcaption>
-    </figure>
+<!-- MathJax -->
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    <h3 class="rl-eyebrow" style="margin-top: 40px;">What we prove</h3>
-    <div class="rl-grid cols-3" style="margin-top: 14px;">
-      <div class="rl-card">
-        <span class="rl-card-icon"><i class="fas fa-check"></i></span>
-        <p><strong>RLCR provably optimizes for both accuracy &amp; calibration.</strong></p>
-      </div>
-      <div class="rl-card">
-        <span class="rl-card-icon"><i class="fas fa-check"></i></span>
-        <p><strong>Calibration comes at no cost to accuracy.</strong></p>
-      </div>
-      <div class="rl-card">
-        <span class="rl-card-icon"><i class="fas fa-check"></i></span>
-        <p><strong>Works with any bounded proper scoring rule</strong> — we use the Brier score.</p>
-      </div>
-    </div>
-  </section>
+<!-- Style for fade, scroll, and tabs -->
+<style>
+  .fade-math {
+    transition: opacity 0.4s ease;
+  }
+  .is-hidden {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+  }
+  .math-view {
+    opacity: 1;
+    position: relative;
+  }
+  .math-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+  .math-scroll p {
+    white-space: nowrap;
+  }
+</style>
 
-  <!-- ============ Results ============ -->
-  <section id="results" class="rl-section">
-    <div class="rl-section-head">
-      <span class="rl-eyebrow">Results</span>
-      <h2>Calibration error reduced by up to 90%</h2>
-      <p class="rl-lede">On diverse QA &amp; math benchmarks, both in-domain and out-of-distribution.</p>
-    </div>
+<!-- JavaScript Logic -->
+<script>
+  function showMath(mode) {
+    const intuitiveTab = document.getElementById('tab-intuitive');
+    const symbolicTab = document.getElementById('tab-symbolic');
+    const intuitiveMath = document.getElementById('intuitive-math');
+    const symbolicMath = document.getElementById('symbolic-math');
 
-    <div class="rl-grid cols-3">
-      <div class="rl-card is-stat">
-        <span class="rl-stat">↓ 90%</span>
-        <p><strong>Accuracy</strong> stays on par with (or better than) RL baselines, with calibration error reduced by up to 90%.</p>
-      </div>
-      <div class="rl-card is-stat">
-        <span class="rl-stat"><i class="fas fa-trophy" style="font-size: 24px;"></i></span>
-        <p>Outperforms <strong>post-hoc classifiers &amp; probes</strong> on calibration.</p>
-      </div>
-      <div class="rl-card is-stat">
-        <span class="rl-stat">OOD</span>
-        <p><strong>RLVR degrades calibration</strong> on out-of-distribution tasks, while <strong>RLCR significantly improves it</strong>.</p>
-      </div>
-    </div>
+    if (mode === 'intuitive') {
+      intuitiveTab.classList.add('is-active');
+      symbolicTab.classList.remove('is-active');
+      intuitiveMath.classList.remove('is-hidden');
+      symbolicMath.classList.add('is-hidden');
+    } else {
+      symbolicTab.classList.add('is-active');
+      intuitiveTab.classList.remove('is-active');
+      symbolicMath.classList.remove('is-hidden');
+      intuitiveMath.classList.add('is-hidden');
+    }
 
-    <figure class="rl-figure">
-      <img src="assets/images/results.jpeg" alt="Accuracy and calibration results across benchmarks">
-    </figure>
-  </section>
+    if (window.MathJax) MathJax.typeset();
+  }
+</script>
 
-  <!-- ============ Test-time scaling ============ -->
-  <section id="test-time-scaling" class="rl-section">
-    <div class="rl-section-head">
-      <span class="rl-eyebrow">Test-time scaling</span>
-      <h2>Can confidence scores help at test time?</h2>
-      <p class="rl-lede">Yes — confidence estimates can be directly integrated into <strong>test-time scaling strategies</strong> to improve performance when additional compute is available.</p>
-    </div>
+<section id="results" class="section" style="font-family: 'DM Sans', sans-serif;">
+  <div class="container">
+    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem; position: relative;">
+      <h2 class="title is-3 has-text-centered">Results 📊</h2>
 
-    <div class="rl-grid cols-2">
-      <div class="rl-card">
-        <span class="rl-card-icon"><i class="fas fa-trophy"></i></span>
-        <h3>Max-confidence selection</h3>
-        <p>Choose the response with the highest self-reported confidence.</p>
-      </div>
-      <div class="rl-card">
-        <span class="rl-card-icon"><i class="fas fa-vote-yea"></i></span>
-        <h3>Confidence-weighted majority voting</h3>
-        <p>Aggregate multiple responses, weighting each vote by its confidence score.</p>
-      </div>
-    </div>
-
-    <div class="rl-callout">These strategies yield <strong>better accuracy and calibration</strong> as compute scales.</div>
-
-    <figure class="rl-figure">
-      <img src="assets/images/inf_scaling.png" alt="Accuracy and calibration under inference-time scaling strategies">
-    </figure>
-  </section>
-
-  <!-- ============ Uncertainty CoT ============ -->
-  <section id="uncertainty-cot" class="rl-section">
-    <div class="rl-section-head">
-      <span class="rl-eyebrow">Uncertainty CoT</span>
-      <h2>Does explicitly reasoning about uncertainty help?</h2>
-      <p class="rl-lede">To investigate the impact of uncertainty reasoning within the chain-of-thought (CoT), we trained two types of classifiers.</p>
-    </div>
-
-    <div class="rl-grid cols-2">
-      <div class="rl-card">
-        <h3>Baseline classifier</h3>
-        <p>Trained on model solutions and final answers.</p>
-      </div>
-      <div class="rl-card">
-        <h3>Analysis classifier</h3>
-        <p>Trained on the same, but with explicit uncertainty reasoning included in the CoT.</p>
-      </div>
-    </div>
-
-    <div class="rl-prose" style="margin-top: 22px;">
       <p>
-        <strong>Result:</strong> the analysis classifier <strong>outperformed</strong> the baseline, particularly for <strong>smaller model sizes</strong>.
+        On diverse QA & math benchmarks (both in-domain and out-of-distribution):
+      </p>
+
+      <ul>
+        <li>✨ <strong>Accuracy</strong> stays on par (or better) than RL baselines, with <strong>calibration error reduced by up to 90%</strong>.</li>
+        <li>✨ Outperforms <strong>post-hoc classifiers & probes</strong> on calibration.</li>
+        <li>✨ <strong>RLVR degrades calibration</strong> in OOD tasks, while <strong>RLCR significantly improves it</strong>.</li>
+      </ul>
+
+      <div class="image-container" style="text-align: center; margin: 20px 0;">
+        <img src="assets/images/results.jpeg" alt="Results Chart" style="max-width: 100%; height: auto;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="test-time-scaling" class="section" style="font-family: 'DM Sans', sans-serif;">
+  <div class="container">
+    <div class="box has-text-centered" style="border: 1px solid #ccc; padding: 1.5rem; position: relative;">
+      <h2 class="title is-3">Can confidence scores help at test time? 🚀</h2>
+
+      <p>
+        Yes — confidence estimates can be directly integrated into <strong>test-time scaling strategies</strong> to improve performance when additional compute is available.
+      </p>
+
+      <p>We explore two simple yet effective techniques:</p>
+      <ul>
+        <li><strong>Max-Confidence Selection</strong>: Choose the response with the highest self-reported confidence.</li>
+        <li><strong>Confidence-Weighted Majority Voting</strong>: Aggregate multiple responses, weighting each vote by its confidence score.</li>
+      </ul>
+
+      <p>
+        These strategies yield <strong>better accuracy and calibration</strong> as compute scales. 📈
+      </p>
+
+      <div class="image-container" style="text-align: center; margin: 20px 0;">
+        <img src="assets/images/inf_scaling.png" alt="Inference Scaling Strategies" style="max-width: 100%; height: auto;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="uncertainty-cot" class="section" style="font-family: 'DM Sans', sans-serif;">
+  <div class="container">
+    <div class="box" style="border: 1px solid #ccc; padding: 1.5rem; position: relative;">
+      <h2 class="title is-3 has-text-centered">Does Explicitly Reasoning About Uncertainty Help? 🧠</h2>
+
+      <p>
+        To investigate the impact of uncertainty reasoning within the chain-of-thought (CoT), we trained two types of classifiers:
+      </p>
+      <br>
+      <li><strong>Baseline:</strong> Trained on model solutions and final answers.</li>
+      <li><strong>Analysis:</strong> Trained on the same, but with explicit uncertainty reasoning included in the CoT.</li>
+      
+      <br>
+      <p>
+        <strong>Result:</strong> The analysis classifier <strong>outperformed</strong> the baseline, particularly for <strong>smaller model sizes</strong>.  
         Larger models can infer confidence from solutions alone, but smaller ones benefit from having uncertainty reasoning made explicit.
       </p>
+
+      <br>
+      <p>
+        🔍 <strong>Classifier capacity shapes the optimal CoT content</strong> — a key insight for future work in prompting and model alignment.
+      </p>
+
+      <div class="image-container" style="text-align: center; margin: 20px 0;">
+        <img src="assets/images/classifier.png" alt="Classifier Results" style="max-width: 100%; height: auto;">
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="rl-callout"><strong>Classifier capacity shapes the optimal CoT content</strong> — a key insight for future work in prompting and model alignment.</div>
-
-    <figure class="rl-figure">
-      <img src="assets/images/classifier.png" alt="Classifier calibration results with and without uncertainty analysis">
-    </figure>
-  </section>
-
-  <!-- ============ BibTeX ============ -->
-  <section id="BibTeX" class="rl-section">
-    <div class="rl-section-head">
-      <span class="rl-eyebrow">Cite</span>
-      <h2>BibTeX</h2>
+<section class="section" id="BibTeX" style="font-family: 'DM Sans', sans-serif; border: 1px solid #ccc; border-radius: 8px; padding: 1.5rem; position: relative;">
+  <div class="container is-max-desktop content">
+    <h2 class="title" style="text-align: center;">BibTeX</h2>
+    <div class="bib-card">
+      <div class="bib-bar">
+        <span class="bib-label">Citation</span>
+        <button type="button" class="bib-copy" id="bib-copy" aria-label="Copy BibTeX to clipboard">
+          <i class="far fa-copy"></i><span class="bib-copy-text">Copy</span>
+        </button>
+      </div>
+      <pre class="bib-code"><code id="bib-text"><span class="bib-line"><span class="bib-type">@inproceedings</span>{<span class="bib-key">rlcr_beyondbinaryrewards_traininglms</span>,</span><span class="bib-line is-field">  <span class="bib-field">title</span>     = {<span class="bib-val">Beyond Binary Rewards: Training {LM}s to Reason About Their Uncertainty</span>},</span><span class="bib-line is-field">  <span class="bib-field">author</span>    = {<span class="bib-val">Mehul Damani and Isha Puri and Stewart Slocum and Idan Shenfeld and Leshem Choshen and Yoon Kim and Jacob Andreas</span>},</span><span class="bib-line is-field">  <span class="bib-field">booktitle</span> = {<span class="bib-val">The Fourteenth International Conference on Learning Representations</span>},</span><span class="bib-line is-field">  <span class="bib-field">year</span>      = {<span class="bib-val">2026</span>},</span><span class="bib-line is-field">  <span class="bib-field">url</span>       = {<span class="bib-val">https://openreview.net/forum?id=ASQ649zdHm</span>}</span><span class="bib-line">}</span></code></pre>
     </div>
-    <div class="rl-bib">
-      <button type="button" class="rl-copy" id="bib-copy"><i class="far fa-copy"></i><span>Copy</span></button>
-      <pre><code id="bib-text">@misc{damani2025binaryrewardstraininglms,
-  title={Beyond Binary Rewards: Training LMs to Reason About Their Uncertainty},
-  author={Mehul Damani and Isha Puri and Stewart Slocum and Idan Shenfeld and Leshem Choshen and Yoon Kim and Jacob Andreas},
-  year={2025},
-  eprint={2507.16806},
-  archivePrefix={arXiv},
-  primaryClass={cs.LG},
-  url={https://arxiv.org/abs/2507.16806},
-}</code></pre>
-    </div>
-  </section>
+    <script>
+      document.getElementById('bib-copy').addEventListener('click', function () {
+        const btn = this;
+        const text = [...document.querySelectorAll('#bib-text .bib-line')].map(l => l.textContent).join('\n');
+        const done = () => {
+          btn.classList.add('is-copied');
+          btn.querySelector('.bib-copy-text').textContent = 'Copied!';
+          setTimeout(() => {
+            btn.classList.remove('is-copied');
+            btn.querySelector('.bib-copy-text').textContent = 'Copy';
+          }, 1800);
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(done);
+        } else {
+          // Fallback for non-HTTPS contexts (e.g. opening the file locally)
+          const ta = document.createElement('textarea');
+          ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); ta.remove(); done();
+        }
+      });
+    </script>
+  </div>
+</section>
 
-  <!-- ============ Code ============ -->
-  <section id="Code" class="rl-section">
-    <div class="rl-section-head">
-      <span class="rl-eyebrow">Code</span>
-      <h2>Code, models &amp; data</h2>
-    </div>
-    <a class="rl-repo" href="https://github.com/damanimehul/RLCR" target="_blank" rel="noopener noreferrer">
-      <span class="rl-repo-icon"><i class="fab fa-github"></i></span>
-      <span>
-        <span class="rl-repo-title">damanimehul / RLCR</span>
-        <span class="rl-repo-desc" style="display: block;">For all code, models, and data, check out the RLCR GitHub repo. We provide a detailed README with instructions for setting up, training, and evaluating the model.</span>
-      </span>
-      <i class="fas fa-arrow-right rl-repo-go"></i>
-    </a>
-  </section>
+<br><br>
 
-  <!-- ============ Slides ============ -->
-  <section id="Slides" class="rl-section">
-    <div class="rl-section-head">
-      <span class="rl-eyebrow">Talk</span>
-      <h2>Slides</h2>
+<section class="section" id="Code" style="font-family: 'DM Sans', sans-serif; border: 1px solid #ccc; border-radius: 8px; padding: 1.5rem; position: relative;">
+  <div class="container is-max-desktop content">
+    <h2 class="title" style="text-align: center;">Code</h2>
+    <div class="columns">
+      <div class="column">
+        <img src="https://github-readme-stats.vercel.app/api/pin/?username=damanimehul&repo=RLCR" alt="RLCR repo card" />
+      </div>
+      <div class="column">
+        <p><br>For all code, models, and data, check out the <a href="https://github.com/damanimehul/RLCR">RLCR GitHub Repo</a>. We provide a detailed README with instructions for setting up, training, and evaluating the model.</p>
+      </div>
     </div>
-    <div class="rl-slides">
-      <iframe src="assets/pdfs/rlcr_talk_draft1.pdf#toolbar=0&navpanes=0&scrollbar=0"
-              title="RLCR talk slides" loading="lazy"></iframe>
+  </div>
+</section>
+
+
+<br><br>
+
+
+
+<section id="Slides" class="section" style="font-family: 'DM Sans', sans-serif;">
+  <div class="box" style="border:1px solid #ccc; padding:1.5rem; position:relative; height:90vh; overflow:hidden;">
+    <h2 class="title is-3 has-text-centered">Slides</h2>
+  
+    <div style="position:absolute; inset:4rem 1.5rem 1.5rem 1.5rem;"> <!-- leaves room for title/padding -->
+      <iframe
+        src="assets/pdfs/rlcr_talk_draft1.pdf#toolbar=0&navpanes=0&scrollbar=0"
+        style="width:100%; height:100%; border:0; display:block;"
+        frameborder="0"
+        oncontextmenu="return false">
+      </iframe>
     </div>
-  </section>
+  </div>
+  
+</section>
 
-  <footer class="rl-footer">
-    <span>Beyond Binary Rewards · MIT CSAIL</span>
-    <a href="#top">Back to top ↑</a>
-  </footer>
-</main>
 
-<script src="examples-content.js"></script>
-<script src="static/js/examples.js"></script>
+
+
+
+
+<!-- Floating table of contents -->
+<nav class="side-toc" id="side-toc" aria-label="Table of contents">
+  <button type="button" class="side-toc-toggle" aria-expanded="false" aria-controls="side-toc-panel">
+    <span class="dot"></span><span class="label">Contents</span>
+  </button>
+  <div class="side-toc-panel" id="side-toc-panel">
+    <p class="side-toc-title">Contents</p>
+    <ul>
+      <li><a href="#why-rlcr">Intro</a></li>
+      <li><a href="#examples">Examples</a></li>
+      <li><a href="#our-idea">Method</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#test-time-scaling">Test-Time Scaling</a></li>
+      <li><a href="#uncertainty-cot">Uncertainty CoT</a></li>
+      <li><a href="#BibTeX">BibTeX</a></li>
+      <li><a href="#Code">Code</a></li>
+      <li><a href="#Slides">Talk Slides</a></li>
+    </ul>
+  </div>
+</nav>
+
 <script>
-  // Equation form toggle
-  document.querySelectorAll('.rl-seg button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.rl-seg button').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
-      document.querySelectorAll('[data-eq-panel]').forEach(p => p.hidden = p.dataset.eqPanel !== btn.dataset.eq);
-    });
-  });
-
-  // Copy BibTeX
-  document.getElementById('bib-copy').addEventListener('click', e => {
-    const btn = e.currentTarget;
-    navigator.clipboard.writeText(document.getElementById('bib-text').textContent).then(() => {
-      btn.querySelector('span').textContent = 'Copied';
-      setTimeout(() => btn.querySelector('span').textContent = 'Copy', 1600);
-    });
-  });
-
-  // Highlight the current section in the nav
   (function () {
-    const links = [...document.querySelectorAll('.rl-nav-links a')];
-    const byId = Object.fromEntries(links.map(a => [a.getAttribute('href').slice(1), a]));
-    const visible = new Set();
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(en => en.isIntersecting ? visible.add(en.target.id) : visible.delete(en.target.id));
-      const first = links.find(a => visible.has(a.getAttribute('href').slice(1)));
-      links.forEach(a => a.classList.toggle('is-current', a === first));
-      if (first) { const bar = first.parentElement; bar.scrollTo({ left: first.offsetLeft - (bar.clientWidth - first.offsetWidth) / 2, behavior: 'smooth' }); }
-    }, { rootMargin: '-80px 0px -55% 0px' });
-    Object.keys(byId).forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
+    const toc = document.getElementById('side-toc');
+    const toggle = toc.querySelector('.side-toc-toggle');
+    const label = toc.querySelector('.side-toc-toggle .label');
+    const links = [...toc.querySelectorAll('a')];
+    const sections = links.map(a => document.querySelector('section' + a.getAttribute('href')));
+    const firstSection = sections[0];
+
+    function update() {
+      // Show the TOC once the reader reaches the first section
+      toc.classList.toggle('is-visible', firstSection.getBoundingClientRect().top < window.innerHeight * 0.8);
+
+      // Current section = last one whose top has passed 35% of the viewport
+      const line = window.innerHeight * 0.35;
+      let current = 0;
+      sections.forEach((sec, i) => { if (sec && sec.getBoundingClientRect().top <= line) current = i; });
+      // At the very bottom, the last section is current even if it's short
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = sections.length - 1;
+
+      links.forEach((a, i) => a.classList.toggle('is-current', i === current));
+      label.textContent = links[current].textContent;
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(() => { update(); ticking = false; }); }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+
+    function setOpen(open) {
+      toc.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    }
+    toggle.addEventListener('click', () => setOpen(!toc.classList.contains('is-open')));
+    links.forEach(a => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('click', e => { if (!toc.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
   })();
 </script>
 

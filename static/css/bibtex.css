@@ -1,0 +1,64 @@
+/* BibTeX citation card with copy button */
+
+.bib-card {
+  border: 1px solid #e4e2ec;
+  border-radius: 12px;
+  background: #faf9fd;
+  overflow: hidden;
+  text-align: left;
+}
+
+.bib-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px 8px 16px;
+  border-bottom: 1px solid #e4e2ec;
+  background: #fff;
+}
+.bib-label {
+  font: 600 11.5px 'Inter', system-ui, sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #8a8797;
+}
+
+.bib-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border: 1px solid #e4e2ec;
+  border-radius: 8px;
+  background: #fff;
+  font: 500 13px 'Inter', system-ui, sans-serif;
+  color: #2b2935;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.bib-copy:hover { background: #f4f2fa; border-color: #d9d6e3; }
+.bib-copy.is-copied { color: #1f8a4c; border-color: #bfe3cc; background: #effaf3; }
+
+/* .content pre comes from Bulma; override it */
+.content pre.bib-code,
+pre.bib-code {
+  margin: 0;
+  padding: 18px 20px;
+  background: transparent;
+  color: #3c3a47;
+  font: 13.5px/1.75 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  white-space: pre;
+  overflow-x: auto;
+}
+.bib-code code { background: none; color: inherit; font: inherit; padding: 0; }
+
+.bib-type { color: #4A1FB4; font-weight: 500; }
+.bib-key { color: #d23f7a; }
+.bib-field { color: #2f6be0; }
+.bib-val { color: #17161d; }
+
+/* One block per line; long values wrap with a hanging indent under the "{" */
+.content pre.bib-code,
+pre.bib-code { white-space: pre-wrap; overflow-wrap: anywhere; }
+.bib-line { display: block; }
+.bib-line.is-field { padding-left: 15ch; text-indent: -15ch; }
